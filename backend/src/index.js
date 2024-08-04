@@ -38,7 +38,7 @@ fastify.route({
 });
 
 try{
-    fastify.listen({port:3002});
+    fastify.listen({port:3003});
 } catch(error){
     fastify.log.error(error);
     process.exit(1);
