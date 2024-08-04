@@ -14,6 +14,22 @@ fastify.get('/', (req,reply) => {
 fastify.route({
     method: 'GET',
     url: '/hello/:name',
+    schema: {
+        params: {
+            properties:{
+                name:{ type: 'string' }
+            },
+            required: ['name']
+        },
+        response: {
+            200: {
+                properties: {
+                    message: {type: 'string'}
+                },
+                required: ['message']
+            }
+        }
+    },
     handler: (req,reply) => {
         return {
             message: `Hello ${req.params.name}`
