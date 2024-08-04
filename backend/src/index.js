@@ -11,6 +11,16 @@ fastify.get('/', (req,reply) => {
     };
 });
 
+fastify.route({
+    method: 'GET',
+    url: '/hello/:name',
+    handler: (req,reply) => {
+        return {
+            message: `Hello ${req.params.name}`
+        };
+    }
+});
+
 try{
     fastify.listen({port:3002});
 } catch(error){
