@@ -1,7 +1,8 @@
-const clientId = process.env.TOKEN;
+const clientId = import.meta.env.VITE_TOKEN;
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
+console.log("got here");
 if (!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
