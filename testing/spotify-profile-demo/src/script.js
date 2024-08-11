@@ -2,16 +2,26 @@ const clientId = import.meta.env.VITE_TOKEN;
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
-console.log("got here");
+// start of code
 if (!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
     const accessToken = await getAccessToken(clientId, code);
+    
     const profile = await fetchProfile(accessToken);
+    const data = await getTopArtists(accessToken);
+
+    const analysis = await getTopArtistsInfo(data);
+
+    console.log("analysis",analysis);
     console.log(profile);
-    populateUI(profile);
+    console.log(data);
+
+    populateUI(profile, data);
 }
 
+
+// functions
 export async function redirectToAuthCodeFlow(clientId) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
@@ -22,7 +32,7 @@ export async function redirectToAuthCodeFlow(clientId) {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "http://localhost:5173/callback");
-    params.append("scope", "user-read-private user-read-email");
+    params.append("scope", "user-read-private user-read-email user-top-read");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
@@ -50,7 +60,6 @@ async function generateCodeChallenge(codeVerifier) {
 
 export async function getAccessToken(clientId, code) {
     const verifier = localStorage.getItem("verifier");
-
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
@@ -68,6 +77,7 @@ export async function getAccessToken(clientId, code) {
     return access_token;
 }
 
+
 async function fetchProfile(token) {
     const result = await fetch("https://api.spotify.com/v1/me", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
@@ -76,7 +86,7 @@ async function fetchProfile(token) {
     return await result.json();
 }
 
-function populateUI(profile) {
+function populateUI(profile, data) {
     document.getElementById("displayName").innerText = profile.display_name;
     if (profile.images[0]) {
         const profileImage = new Image(200, 200);
@@ -90,4 +100,22 @@ function populateUI(profile) {
     document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
     document.getElementById("url").innerText = profile.href;
     document.getElementById("url").setAttribute("href", profile.href);
+    document.getElementById("topArtists").innerText = data;
+}
+
+async function getTopArtists(token) {
+    console.log("got to top artists");
+    const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=5", {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+    return await result.json();
+}
+
+async function getTopArtistsInfo(data){
+    const result = await fetch("http://127.0.0.1:3003/ai/getArtistAnalysis", {
+        method: "POST",
+        body: data
+    
+    });
+    return await result.json();
 }
