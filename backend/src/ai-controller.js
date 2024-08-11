@@ -1,5 +1,6 @@
 import testcall from './aitasks/test-api.js';
 import gpt3test from './aitasks/gpt3-test.js';
+import getArtistAnalysis from './aitasks/getArtistAnalysis.js';
 
 const responseSchema = {
     response: {
@@ -45,6 +46,16 @@ const aiController = (fastify, options, done) => {
     fastify.get('/gpt3test', async function() {
 
         const result = await gpt3test();
+        
+        return {
+            result
+        };
+    });
+
+    // test call to gpt assistant
+    fastify.post('/getArtistAnalysis', async function() {
+
+        const result = await getArtistAnalysis();
         
         return {
             result
