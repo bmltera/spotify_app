@@ -53,9 +53,11 @@ const aiController = (fastify, options, done) => {
     });
 
     // test call to gpt assistant
-    fastify.post('/getArtistAnalysis', async function() {
+    fastify.post('/getArtistAnalysis', async function(request, reply) {
+        const body = request.body;
+        await console.log("BODYBODYBODYBODYBODY",JSON.stringify(body));
 
-        const result = await getArtistAnalysis();
+        const result = await getArtistAnalysis(body);
         
         return {
             result

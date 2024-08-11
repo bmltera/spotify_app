@@ -11,13 +11,13 @@ if (!code) {
     const profile = await fetchProfile(accessToken);
     const data = await getTopArtists(accessToken);
 
-    const analysis = await getTopArtistsInfo(data);
+    const analysis = await getTopArtistsInfo(data.items);
 
+    console.log("data", data.items);
     console.log("analysis",analysis);
     console.log(profile);
-    console.log(data);
 
-    populateUI(profile, data);
+    populateUI(profile, data,analysis);
 }
 
 
@@ -86,7 +86,7 @@ async function fetchProfile(token) {
     return await result.json();
 }
 
-function populateUI(profile, data) {
+function populateUI(profile, data, analysis) {
     document.getElementById("displayName").innerText = profile.display_name;
     if (profile.images[0]) {
         const profileImage = new Image(200, 200);
@@ -100,7 +100,9 @@ function populateUI(profile, data) {
     document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
     document.getElementById("url").innerText = profile.href;
     document.getElementById("url").setAttribute("href", profile.href);
-    document.getElementById("topArtists").innerText = data;
+    document.getElementById("analysis").innerText = analysis.result.message.content;
+
+    console.log(analysis.result.message.content);
 }
 
 async function getTopArtists(token) {
@@ -108,13 +110,15 @@ async function getTopArtists(token) {
     const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=5", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
+
     return await result.json();
 }
 
 async function getTopArtistsInfo(data){
+    console.log('got to top artists info', data);
     const result = await fetch("http://127.0.0.1:3003/ai/getArtistAnalysis", {
         method: "POST",
-        body: data
+        body: JSON.stringify(data)
     
     });
     return await result.json();
