@@ -1,4 +1,4 @@
-const clientId = import.meta.env.VITE_TOKEN;
+const clientId = import.meta.env.VITE_TOKEN_BILL;
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 

@@ -1,6 +1,7 @@
 import testcall from './aitasks/test-api.js';
 import gpt3test from './aitasks/gpt3-test.js';
 import getArtistAnalysis from './aitasks/getArtistAnalysis.js';
+import roastMe from './aitasks/roastMe.js';
 
 const responseSchema = {
     response: {
@@ -58,6 +59,18 @@ const aiController = (fastify, options, done) => {
         await console.log("BODYBODYBODYBODYBODY",JSON.stringify(body));
 
         const result = await getArtistAnalysis(body);
+        
+        return {
+            result
+        };
+    });
+
+    // roast me
+    fastify.post('/roastMe', async function(request, reply) {
+        const body = request.body;
+        await console.log("BODYBODYBODYBODYBODY",JSON.stringify(body));
+
+        const result = await roastMe(body);
         
         return {
             result
