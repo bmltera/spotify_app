@@ -4,31 +4,52 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  const handleLogin = () => {
+    setIsLoggedIn(true)
+  }
+
+  
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+    <div className="App" >
+      <h2> Roastify </h2>
+      <h1>Roastify</h1>
+      <div> roast my music taste</div>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={handleLogin}>
+          login with spotify
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="card">
+        {isLoggedIn?(
+          <div> LOGGED IN </div>
+        ):(
+          <InitialContent onLogin = {handleLogin} />
+        )}
+      </div>
     </div>
   )
 }
+
+function InitialContent({onLogin}: ({onLogin: () => void})) {
+  return (
+    <div>
+      <p>roast my music taste</p>
+      <button onClick={onLogin}>
+        login with spotify
+      </button>
+    </div>
+  )
+}
+
+function NewContent() {
+  return (
+    <div>
+      <p>welcome, I am your personalized music roaster</p>
+    </div>
+  )
+}
+
 
 export default App
