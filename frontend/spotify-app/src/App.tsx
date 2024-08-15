@@ -23,7 +23,7 @@ function App() {
       </div>
       <div className="card">
         {isLoggedIn?(
-          <div> LOGGED IN </div>
+          <div> <NewContent /> </div>
         ):(
           <InitialContent onLogin = {handleLogin} />
         )}
@@ -43,7 +43,25 @@ function InitialContent({onLogin}: ({onLogin: () => void})) {
   )
 }
 
+function LandingPage(){
+  const getSpotifyUserLogin = () => {
+    fetch("http://127.0.0.1:3003/spotify/login")
+  }
+}
+
+  // function LandingPage(){
+  //   const getSpotifyUserLogin = () => {
+  //     fetch("http://127.0.0.1:3003/spotify/login")
+  //     .then((response) => response.text())
+  //     .then(response => {
+  //       window.location.replace(response);
+  //     })
+  //     }
+  //   }
+  
+
 function NewContent() {
+  LandingPage()
   return (
     <div>
       <p>welcome, I am your personalized music roaster</p>

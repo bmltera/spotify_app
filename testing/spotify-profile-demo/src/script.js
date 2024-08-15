@@ -7,7 +7,7 @@ if (!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
     const accessToken = await getAccessToken(clientId, code);
-    
+    console.log(accessToken);
     const profile = await fetchProfile(accessToken);
     const data = await getTopArtists(accessToken);
 

@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import greetingsController from './greetings-controller.js';
 import aiController from './ai-controller.js';
 import cors from '@fastify/cors'
+import spotifyController from './spotify-controller.js';
 
 
 const fastify = Fastify({
@@ -17,7 +18,7 @@ await fastify.register(cors, {
 
 // openAI controller
 fastify.register(aiController,{prefix: '/ai'});
-
+fastify.register(spotifyController,{prefix: '/spotify'});
 fastify.register(greetingsController,{prefix: '/greetings'});
 
 try{
