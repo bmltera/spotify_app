@@ -47,7 +47,7 @@ const spotifyController = (fastify, options, done) => {
 
         const data = await response.json();
         let query = new URLSearchParams(data).toString();
-        reply.redirect(`http://localhost:5174/callback/${query}`);
+        reply.redirect(`${process.env.REDIRECTURI}/${query}`);
 
     });
 
@@ -77,3 +77,4 @@ const spotifyController = (fastify, options, done) => {
 }
 
 export default spotifyController;
+
