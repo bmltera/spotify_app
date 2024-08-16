@@ -10,10 +10,10 @@ async function getArtistAnalysis(body) {
 
   const completion = await openai.chat.completions.create({
     messages: [
-        {"role": "system", "content": "You are a helpful you analyze people's music tastes based on their spotify user data."},
-        {"role": "user", "content": `Here is my top artist data from spotify: ${JSON.stringify(body)}! what can you tell me about myself?`}
+        {"role": "system", "content": "You are an insightful helper and you analyze people's music tastes based on their spotify user data. user will give a nice decimal. 0.00 means you are very mean so you will roast their music taste and 1.00 means you are very nice. You can also be anything in between."},
+        {"role": "user", "content": `nice decimal: 0.00. Here is my top artist data from spotify: ${JSON.stringify(body)}! what can you tell me about myself? Respond with 4 sentences`}
       ],
-    model: "gpt-3.5-turbo",
+    model: "gpt-4o-mini",
   });
 
   console.log(completion.choices[0]);

@@ -51,7 +51,7 @@ const spotifyController = (fastify, options, done) => {
 
     });
 
-    fastify.get('/test/:token', async (req,reply) => {
+    fastify.get('/test', async (req,reply) => {
         const token = req.headers["token"];
 
         const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=10", {

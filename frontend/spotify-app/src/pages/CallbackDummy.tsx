@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-export default function Callback() {
+export default function CallbackDummy() {
     
     // grab token
     const [queryParameters] = useSearchParams()
@@ -10,7 +10,7 @@ export default function Callback() {
     //console.log(token);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:3003/spotify/test`,{
+        fetch(`http://127.0.0.1:3003/spotify/dummy`,{
             method: 'GET',
             headers: {
                 "token": token
@@ -18,8 +18,8 @@ export default function Callback() {
         })
             .then((response) => response.json())
             .then((data) => {
-                setBody(data.analysis.message.content);
-                console.log(data.analysis.message.content);
+                setBody(data.data);
+                console.log(data.data);
             });
     },[]);
 
