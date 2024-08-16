@@ -87,9 +87,9 @@ const spotifyController = (fastify, options, done) => {
         // console.log(items);
         
         // const analysis = items; //await getArtistAnalysis(items);
-        await new Promise(resolve => setTimeout(resolve, 500)).then(() => { console.log('World!'); });
+        await new Promise(resolve => setTimeout(resolve, 1500)).then(() => { console.log('World!'); });
         return {
-            data: "this is dummy data"
+            data: "this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data"
         };
 
 

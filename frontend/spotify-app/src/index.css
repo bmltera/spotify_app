@@ -1,5 +1,25 @@
+@font-face {
+  font-family: 'circular';
+  src: url('./fonts/circular/CircularStd-Book.woff2') format('woff2'),
+       url('./fonts/circular/CircularStd-Black.woff') format('woff'),
+       url('./fonts/circular/CircularStd-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'circular-bold';
+  src: url('./fonts/circular/CircularStd-Bold.woff2') format('woff2'),
+       url('./fonts/circular/CircularStd-Black.woff') format('woff'),
+       url('./fonts/circular/CircularStd-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'circular-bold','circular', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -31,7 +51,6 @@ a:hover {
 
 body {
   margin: 0;
-  border: 3px solid #1DB954;
   display: block;
   place-items: center;
   min-width: 320px;
@@ -42,25 +61,33 @@ body {
 }
 
 h1 {
-  border: 1px solid #1DB954;
-
   font-size: 3.2em;
   line-height: 1.1;
   display: flex;
   place-items: top;
-  ;
+  justify-content: center;
+  
+  letter-spacing: -0.1rem;
 }
 
-h2 {
-  font-size: 3.2em;
-  color: #1DB954;
-  line-height: 1.1;
+h2{
   display: flex;
   place-items: top;
-  position: absolute;
-  top: 0;
+  justify-content: center;
+  font-size: 1.5em;
+  line-height: 1.1;
+  font-family: 'circular';
+}
 
-  ;
+h3{
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  place-items: top;
+  justify-content: center;
+  font-size: 1.5em;
+  line-height: 1.1;
+  font-family: 'circular';
 }
 
 button {
@@ -69,7 +96,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
+  font-family: Helvetica;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
