@@ -23,14 +23,16 @@ const spotifyController = (fastify, options, done) => {
     });
 
     fastify.get('/logged', async (req,reply) => {
+        const code = req.query.code;
+        console.log(code);
 
         const params = new URLSearchParams();
         params.append("grant_type", "authorization_code");
-        params.append("code", req.query.code);
+        //params.append("code", code);
+        params.append("code", code);
         params.append("redirect_uri", process.env.REDIRECTURI);
         params.append("client_id", process.env.SPOTIFY_ID);
         params.append("client_secret", process.env.SPOTIFY_SECRET);
-
         const response = await fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
@@ -39,15 +41,13 @@ const spotifyController = (fastify, options, done) => {
             },
             body: params
         })
-        // .then(reply => reply.json())
-        // .then(data => {
-        //     let query = new URLSearchParams(reply).toString();
-        //     reply.redirect(`http://localhost:5174/${query}`);
-        // });
+
 
         const data = await response.json();
+        const token = data.access_token;
         let query = new URLSearchParams(data).toString();
-        reply.redirect(`${process.env.REDIRECTURI}/${query}`);
+        console.log('data',data);
+        reply.redirect(`${process.env.WEB_URI}?token=${token}`);
 
     });
 
@@ -72,6 +72,28 @@ const spotifyController = (fastify, options, done) => {
     });
 
 
+    // dummy data that does not use openAI
+    fastify.get('/dummy/:token', async (req,reply) => {
+        const token = req.headers["token"];
+
+        const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=10", {
+            method: "GET", 
+            headers: { 
+                Authorization: `Bearer ${token}` }
+        });
+
+        console.log(token);
+        const { items } = await result.json();
+        console.log(items);
+        
+        const analysis = items; //await getArtistAnalysis(items);
+
+        return {
+            analysis
+        };
+
+
+    });
     done();
 
 }
