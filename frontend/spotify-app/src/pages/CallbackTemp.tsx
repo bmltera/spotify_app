@@ -9,21 +9,24 @@ export default function CallbackTemp() {
     return (
       <div>
         <div>
-          <h1>Roastify</h1>
+          <h1>roastify</h1>
           <h2>roast my music taste</h2>
         </div>
+
+        <div className="body">
         {
           showAnalysis ? 
             <div>
               <GrabData/>
             </div>: 
             <div>
-        <h3>are you ready?</h3>
-        <div onClick = {() => setShow(true)} >  
-          <GoButton/>
-        </div>
+              <h3>are you ready?</h3>
+              <div onClick = {() => setShow(true)} >  
+                <GoButton/>
+              </div>
             </div>
         }
+        </div>
       </div>
     );
   }
@@ -37,7 +40,7 @@ export default function CallbackTemp() {
     const [showAnalysis, setShow] = useState(false);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:3003/spotify/dummy`,{
+        fetch(`http://127.0.0.1:3003/spotify/roast`,{
             method: 'GET',
             headers: {
                 "token": token
@@ -45,13 +48,15 @@ export default function CallbackTemp() {
         })
             .then((response) => response.json())
             .then((data) => {
-                setBody(data.data);
-                console.log(data.data);
+                setBody(data.analysis.message.content);
+                console.log(data.analysis.message.content);
             });
     },[]);
     return(
       <div>
-        {body ? <p>{body}</p> : <p><CircularProgress /></p>}
+        {body ? <h4>{body}</h4> : 
+        <div><CircularProgress className = "loader">
+          </CircularProgress></div>}
         </div>
       
     );

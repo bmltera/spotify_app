@@ -33,7 +33,7 @@ function App() {
 function Home(){
   return (
     <div className="App" >
-      <h1>Roastify</h1>
+      <h1>roastify</h1>
       <h2> roast my music taste</h2>
       <div className="card">
         <div onClick={LandingPage}>  

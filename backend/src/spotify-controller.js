@@ -1,4 +1,5 @@
 import getArtistAnalysis from './aitasks/getArtistAnalysis.js';
+import roastMe from './aitasks/roastMe.js';
 
 const responseSchema = {
     response: {
@@ -76,17 +77,6 @@ const spotifyController = (fastify, options, done) => {
     fastify.get('/dummy:token', async (req,reply) => {
         const token = req.headers["token"];
 
-        // const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=10", {
-        //     method: "GET", 
-        //     headers: { 
-        //         Authorization: `Bearer ${token}` }
-        // });
-
-        // console.log(token);
-        // const { items } = await result.json();
-        // console.log(items);
-        
-        // const analysis = items; //await getArtistAnalysis(items);
         await new Promise(resolve => setTimeout(resolve, 1500)).then(() => { console.log('World!'); });
         return {
             data: "this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data this is dummy data"
@@ -94,6 +84,28 @@ const spotifyController = (fastify, options, done) => {
 
 
     });
+
+
+    fastify.get('/roast', async (req,reply) => {
+        const token = req.headers["token"];
+
+        const result = await fetch("https://api.spotify.com/v1/me/top/artists?limit=10", {
+            method: "GET", 
+            headers: { 
+                Authorization: `Bearer ${token}` }
+        });
+        console.log(token);
+        const { items } = await result.json();
+        console.log(items);
+        const analysis = await roastMe(items);
+
+        return {
+            analysis
+        };
+
+
+    });
+
     done();
 
 }
