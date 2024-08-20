@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import GoButton from '../assets/GoButton';
 
-export default function CallbackTemp() {
+export default function CallbackSingleApp() {
     const [showAnalysis, setShow] = useState(false);
 
     return (
@@ -40,7 +40,7 @@ export default function CallbackTemp() {
     const [showAnalysis, setShow] = useState(false);
 
     useEffect(() => {
-        fetch(`https://127.0.0.1:3003/spotify/roast`,{
+        fetch(`http://54.175.255.148:3003/spotify/roast`,{
             method: 'GET',
             headers: {
                 "token": token

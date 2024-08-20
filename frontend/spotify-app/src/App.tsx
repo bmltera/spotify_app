@@ -61,8 +61,9 @@ function NewPage() {
 
 const LandingPage = () => {
   // Replace with the actual Spotify authorization URL
-  const spotifyAuthUrl = "http://127.0.0.1:3003/spotify/login";
-  
+  //const spotifyAuthUrl = "https://54.175.255.148:3003/spotify/login";
+  const spotifyAuthUrl = "https://127.0.0.1:3003/spotify/login";
+
   window.location.href = spotifyAuthUrl;
 };
 
