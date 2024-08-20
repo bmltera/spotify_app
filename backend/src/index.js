@@ -30,6 +30,7 @@ const fastify = Fastify({
 await fastify.register(cors, { 
     origin: 'http://localhost:5173', // allow requests from this origin
     origin: 'http://98.51.84.115',
+    origin: 'http://roastifyai-1852893e8025.herokuapp.com/',
     methods: ['GET', 'POST'] // specify allowed methods
   })
 
