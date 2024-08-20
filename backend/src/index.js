@@ -29,7 +29,7 @@ const httpFastify = Fastify({
 
 const fastify = Fastify({
     logger: true,
-    https: httpsOptions
+   // https: httpsOptions
 });
 
 // cors controller
