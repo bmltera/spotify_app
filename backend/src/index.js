@@ -21,6 +21,12 @@ const httpsOptions = {
     cert: fs.readFileSync(certPath)
   };
 
+
+// Create HTTP server
+const httpFastify = Fastify({ 
+    logger: true
+    });
+
 const fastify = Fastify({
     logger: true,
     https: httpsOptions
@@ -28,18 +34,31 @@ const fastify = Fastify({
 
 // cors controller
 await fastify.register(cors, { 
-    origin: ['http://localhost:5173', 'https://roastifyai-1852893e8025.herokuapp.com', 'https://roastifyai-1852893e8025.herokuapp.com/'], // allow requests from this origin
+    origin: ['http://localhost:5173', 'https://melodyai-ac76aba6932b.herokuapp.com', 'https://melodyai-ac76aba6932b.herokuapp.com/'], // allow requests from this origin
     methods: ['GET', 'POST'] // specify allowed methods
   })
-
+// cors controller
+await httpFastify.register(cors, { 
+    origin: ['http://localhost:5173', 'https://melodyai-ac76aba6932b.herokuapp.com', 'https://melodyai-ac76aba6932b.herokuapp.com/'], // allow requests from this origin
+    methods: ['GET', 'POST'] // specify allowed methods
+  })
 
 // openAI controller
 fastify.register(aiController,{prefix: '/ai'});
 fastify.register(spotifyController,{prefix: '/spotify'});
 fastify.register(greetingsController,{prefix: '/greetings'});
+httpFastify.register(aiController,{prefix: '/ai'});
+httpFastify.register(spotifyController,{prefix: '/spotify'});
+httpFastify.register(greetingsController,{prefix: '/greetings'});
 
 try{
-    fastify.listen({ port: 3003, host: '0.0.0.0' });
+    fastify.listen({ port: 80, host: '0.0.0.0' });
+} catch(error){
+    fastify.log.error(error);
+    process.exit(1);
+}
+try{
+    httpFastify.listen({ port: 443, host: '0.0.0.0' });
 } catch(error){
     fastify.log.error(error);
     process.exit(1);
