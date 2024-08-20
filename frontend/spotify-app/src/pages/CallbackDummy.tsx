@@ -15,7 +15,7 @@ export default function CallbackDummy() {
             method: 'GET',
             headers: {
                 "token": token
-            }
+            }as HeadersInit
         })
             .then((response) => response.json())
             .then((data) => {

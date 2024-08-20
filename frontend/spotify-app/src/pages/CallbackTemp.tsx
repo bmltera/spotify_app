@@ -44,7 +44,7 @@ export default function CallbackTemp() {
             method: 'GET',
             headers: {
                 "token": token
-            }
+            } as HeadersInit
         })
             .then((response) => response.json())
             .then((data) => {
@@ -55,8 +55,7 @@ export default function CallbackTemp() {
     return(
       <div>
         {body ? <h4>{body}</h4> : 
-        <div><CircularProgress className = "loader">
-          </CircularProgress></div>}
+        <div className = "loader" ><CircularProgress/></div>}
         </div>
       
     );

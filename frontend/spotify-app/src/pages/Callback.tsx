@@ -14,7 +14,7 @@ export default function Callback() {
             method: 'GET',
             headers: {
                 "token": token
-            }
+            }as HeadersInit
         })
             .then((response) => response.json())
             .then((data) => {
