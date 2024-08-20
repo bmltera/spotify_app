@@ -1,3 +1,8 @@
+## video demo
+
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/HzOWbjvGcRc/0.jpg)](https://www.youtube.com/watch?v=HzOWbjvGcRc)
+
 hosted on Heroku and AWS.
 
 ## note:
@@ -7,8 +12,3 @@ hosted on Heroku and AWS.
 
 frontend is live here:
 https://roastifyai-1852893e8025.herokuapp.com/
-
-## video demo
-
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/HzOWbjvGcRc/0.jpg)](https://www.youtube.com/watch?v=HzOWbjvGcRc)
