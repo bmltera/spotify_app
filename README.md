@@ -1,7 +1,3 @@
-Backend:
-npm install
-npm run dev
-
-Frontend:
-npm install
-npm run dev
+test the app here:
+(backend has not been deployed yet)
+https://roastifyai-1852893e8025.herokuapp.com/
