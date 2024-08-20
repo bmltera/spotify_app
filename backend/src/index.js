@@ -12,6 +12,7 @@ const fastify = Fastify({
 // cors controller
 await fastify.register(cors, { 
     origin: 'http://localhost:5173', // allow requests from this origin
+    origin: '98.51.84.115',
     methods: ['GET', 'POST'] // specify allowed methods
   })
 
