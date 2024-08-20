@@ -52,13 +52,13 @@ httpFastify.register(spotifyController,{prefix: '/spotify'});
 httpFastify.register(greetingsController,{prefix: '/greetings'});
 
 try{
-    fastify.listen({ port: 8443, host: '0.0.0.0' });
+    fastify.listen({ port: 443, host: '0.0.0.0' });
 } catch(error){
     fastify.log.error(error);
     process.exit(1);
 }
 try{
-    httpFastify.listen({ port: 8080, host: '0.0.0.0' });
+    httpFastify.listen({ port: 80, host: '0.0.0.0' });
 } catch(error){
     fastify.log.error(error);
     process.exit(1);
