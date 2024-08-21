@@ -7,8 +7,7 @@ hosted on Heroku and AWS.
 
 ## note:
 - app currently supports developer testing only
-- backend requires SSL certification 
-- once SSL is certified, spotify API will be open for all users
+- awaiting spotify public API approval
 
-try it out here (awaiting spotify public API approval):
+try it out here:
 https://melodyai-ac76aba6932b.herokuapp.com/
